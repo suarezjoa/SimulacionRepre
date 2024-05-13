@@ -104,8 +104,8 @@ const { calcularFrecuencia, FrecuenciaEsperada, ValorObsrvado, validacionAletior
       // Calcular el resultado utilizando la función a probar
       const resultado = validacionAletioridadSucecion(valorObservado, Vesperado);
   
-      // Verificar si el resultado es false
-      expect(resultado).toBe(false);
+      // Verificar si el resultado es true
+      expect(resultado).toBe(true);
     });
   
     // Prueba 3: Verificar si la función devuelve true cuando el valor observado es igual al valor esperado

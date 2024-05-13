@@ -25,9 +25,11 @@ function calcularFrecuencia(sucecionPseualeatoria){
     return sumaFinal;
   }
 
-  function validacionAletioridadSucecion(Vobservado,Vesperado){
+  function validacionAletioridadSucecion(Vobservado){
 
-    if( Vobservado <= Vesperado ) return true;
+
+    vEsperado = 16.9190;
+    if( Vobservado <= vEsperado ) return true;
     else return false;
 
   }

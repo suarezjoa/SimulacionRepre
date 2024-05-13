@@ -1,5 +1,6 @@
-const { calcularFrecuencia, FrecuenciaEsperada, ValorObsrvado } = require('./validacionEstadistica');
-
+const { calcularFrecuencia, FrecuenciaEsperada, ValorObsrvado, validacionAletioridadSucecion } = require('./validacionEstadistica');
+const minCuadMedios = require('./generadorSucesion');
+const { simularNivelDelLago } = require('./simulacionrepresa');
 
 let now = new Date();
 let hour = now.getHours().toString().padStart(2, "0");
@@ -16,7 +17,7 @@ const rl = readline.createInterface({
     output: process.stdout
   });
 function capturarNumeroEntero() {
-    rl.question('Por favor, ingresa un número entero: ', (entrada) => {
+    rl.question('porfavor ingresar los dias de simulacion: ', (entrada) => {
       // Convertir la entrada en un número entero usando parseInt()
       let numeroEntero = parseInt(entrada);
   
@@ -28,13 +29,14 @@ function capturarNumeroEntero() {
       } else {
         console.log("La entrada no es un número entero válido.");
       }
-      //const sucecionNOaleatoria = minCuadMedios(numeroEntero, 1111);
-      const ejemplo = [2, 3, 4, 3, 4, 8, 9, 6, 9]
-      //console.log(calcularFrecuencia(ejemplo));
-      //console.log(ejemplo);
-      //console.log(FrecuenciaEsperada(numeroEntero));
-      console.log(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(ejemplo)))
-      
+      let nivelDelLago = 30;
+
+      const sucecionNOaleatoria = minCuadMedios(numeroEntero, semillaHora);
+      console.log("esta es mi sucecion aleatoria", sucecionNOaleatoria);
+      console.log(calcularFrecuencia(sucecionNOaleatoria));
+      console.log(FrecuenciaEsperada(numeroEntero)); // dias de simulacion aca
+      console.log(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(sucecionNOaleatoria)))
+      if ( validacionAletioridadSucecion(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(sucecionNOaleatoria))) === true){ console.log("Simulacion resultados",simularNivelDelLago(sucecionNOaleatoria,nivelDelLago)) }
       // Cerrar la interfaz readline
       //console.log("",ejemplo);
       //console.log("dsa", simularNivelDelLago(ejemplo,15));
