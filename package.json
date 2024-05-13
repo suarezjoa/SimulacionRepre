@@ -1,0 +1,19 @@
+{
+  "name": "metodos-de-von",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@stdlib/stats-chi2test": "^0.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
