@@ -31,12 +31,21 @@ function capturarNumeroEntero() {
       }
       let nivelDelLago = 30;
 
-      const sucecionNOaleatoria = minCuadMedios(numeroEntero, semillaHora);
-      console.log("esta es mi sucecion aleatoria", sucecionNOaleatoria);
-      console.log(calcularFrecuencia(sucecionNOaleatoria));
-      console.log(FrecuenciaEsperada(numeroEntero)); // dias de simulacion aca
-      console.log(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(sucecionNOaleatoria)))
-      if ( validacionAletioridadSucecion(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(sucecionNOaleatoria))) === true){ console.log("Simulacion resultados",simularNivelDelLago(sucecionNOaleatoria,nivelDelLago)) }
+      //const sucecionNOaleatoria = minCuadMedios(numeroEntero, semillaHora);
+      //console.log("esta es mi sucecion aleatoria", sucecionNOaleatoria);
+      //console.log(calcularFrecuencia(sucecionNOaleatoria));
+      //console.log(FrecuenciaEsperada(numeroEntero)); // dias de simulacion aca
+      //console.log(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(minCuadMedios(numeroEntero, semillaHora))))
+      let h = 0;
+      do {
+        const sucecionNOaleatoria = minCuadMedios(numeroEntero, semillaHora);
+        if (validacionAletioridadSucecion(ValorObsrvado(FrecuenciaEsperada(numeroEntero),calcularFrecuencia(sucecionNOaleatoria))) === true) {
+          console.log("Simulacion resultados",simularNivelDelLago(sucecionNOaleatoria,nivelDelLago))
+          h++;
+        } else {
+            console.log(`Buscando Sucecion de numeros aleatorios`);
+        }
+    } while (h !== 1);
       // Cerrar la interfaz readline
       //console.log("",ejemplo);
       //console.log("dsa", simularNivelDelLago(ejemplo,15));
