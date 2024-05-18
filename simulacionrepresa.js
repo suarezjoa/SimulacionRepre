@@ -1,61 +1,90 @@
-function simularNivelDelLago(secuenciaALATORIA, nivelActual) {
+  function simularNivelDelLago(secuenciaALATORIA, nivelActual) {
     let alertaRoja = 0;
     let compuerta1Abierta = 0;
     let compuerta2Abierta = 0;
     let compuerta3Abierta = 0;
     let compuerta4Abierta = 0;
     let sequia = false;
+    let diasEnSequia = 0;  // Nueva variable para contar los días en sequía
     let incrementoDiario = obtenerIncrementoDiario(secuenciaALATORIA);
+
     for (let i = 0; i < incrementoDiario.length; i++) {
-      // Actualizar nivel del lago
-      if (incrementoDiario[i] === 1 ){
-          nivelActual = nivelActual - 3;
-      }else if (incrementoDiario[i] === 2){
-          nivelActual = nivelActual - 2
-      }else if (incrementoDiario[i] === 3){
-          nivelActual = nivelActual - 1
-      }else if (incrementoDiario[i] === 4){
-           nivelActual = nivelActual + 0
-      }else if (incrementoDiario[i] === 5){
-          nivelActual = nivelActual + 1
-      }else if (incrementoDiario[i] === 6){
-        nivelActual = nivelActual + 2
-      }else if (incrementoDiario[i] === 7){
-        nivelActual = nivelActual + 3
-      }
-      
-      // Verificar si hay alerta roja
-      console.log("nivel del agua", nivelActual)
-      if (nivelActual > 45) {alertaRoja++,compuerta4Abierta++,compuerta3Abierta++,compuerta2Abierta++,compuerta1Abierta++}
-      // Abrir las compuertas según sea necesario
-      else if (nivelActual >= 40) {
-        nivelActual = nivelActual - 3.5;
-        compuerta4Abierta++,compuerta3Abierta++,compuerta2Abierta++,compuerta1Abierta++;
-      }
-      else if (nivelActual >= 32) {
-        nivelActual = nivelActual - 2.5;
-        compuerta3Abierta++,compuerta2Abierta++,compuerta1Abierta++;
-      }
-      else if (nivelActual >= 25) {
-        nivelActual = nivelActual - 1.5;
-        compuerta2Abierta++,compuerta1Abierta++;
-      }
-      else if (nivelActual >= 15) {
-        nivelActual = nivelActual - 1;
-        compuerta1Abierta++;
-      }
-      
-  
-      // Verificar si hay peligro de sequía
-      if (nivelActual <= 2) {
-        sequia = true;
-        console.log("Registrar peligro de sequía ")
-      }
+        let incremento = incrementoDiario[i];
+        let nivelAnterior = nivelActual;
+
+        // Actualizar nivel del lago
+        if (incremento === 1) {
+            nivelActual -= 3;
+        } else if (incremento === 2) {
+            nivelActual -= 2;
+        } else if (incremento === 3) {
+            nivelActual -= 1;
+        } else if (incremento === 4) {
+            // No hay cambio en el nivel del agua
+        } else if (incremento === 5) {
+            nivelActual += 1;
+        } else if (incremento === 6) {
+            nivelActual += 2;
+        } else if (incremento === 7) {
+            nivelActual += 3;
+        }
+
+        // Asegurarse de que el nivel del agua no sea negativo
+        if (nivelActual < 0) {
+            nivelActual = 0;
+        }
+
+        // Determinar si el nivel del agua aumentó o disminuyó
+        let cambio = nivelActual - nivelAnterior;
+        let estadoCambio = cambio > 0 ? "aumentó" : (cambio < 0 ? "disminuyó" : "se mantuvo igual");
+
+        // Mostrar el estado del nivel del agua
+        console.log(`Día ${i + 1}: El nivel del agua es ${nivelActual}. El nivel ${estadoCambio} por ${Math.abs(cambio)} unidades.`);
+
+        // Verificar si hay alerta roja
+        if (nivelActual > 45) {
+            alertaRoja++;
+            compuerta1Abierta++;
+            compuerta2Abierta++;
+            compuerta3Abierta++;
+            compuerta4Abierta++;
+        } else if (nivelActual >= 40) {
+            nivelActual -= 3.5;
+            if (nivelActual < 0) nivelActual = 0;
+            compuerta1Abierta++;
+            compuerta2Abierta++;
+            compuerta3Abierta++;
+            compuerta4Abierta++;
+        } else if (nivelActual >= 32) {
+            nivelActual -= 2.5;
+            if (nivelActual < 0) nivelActual = 0;
+            compuerta1Abierta++;
+            compuerta2Abierta++;
+            compuerta3Abierta++;
+        } else if (nivelActual >= 25) {
+            nivelActual -= 1.5;
+            if (nivelActual < 0) nivelActual = 0;
+            compuerta1Abierta++;
+            compuerta2Abierta++;
+        } else if (nivelActual >= 15) {
+            nivelActual -= 1;
+            if (nivelActual < 0) nivelActual = 0;
+            compuerta1Abierta++;
+        }
+
+        // Verificar si hay peligro de sequía
+        if (nivelActual <= 2) {
+            sequia = true;
+            diasEnSequia++;
+            console.log(`Registrar peligro de sequía. Días en sequía: ${diasEnSequia}`);
+        } else {
+            sequia = false;
+        }
     }
-  
-    return { alertaRoja, compuerta1Abierta, compuerta2Abierta, compuerta3Abierta, compuerta4Abierta, sequia };
+
+    return { alertaRoja, compuerta1Abierta, compuerta2Abierta, compuerta3Abierta, compuerta4Abierta, sequia, diasEnSequia };
   }
-  
+
   function unirValores(x1, x2, x3) {
     // Convertir los valores a cadenas de texto
     let stringX1 = x1.toString();
