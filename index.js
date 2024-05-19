@@ -21,15 +21,8 @@ function capturarNumeroEntero() {
       // Convertir la entrada en un número entero usando parseInt()
       let numeroEntero = parseInt(entrada);
   
-      // Verificar si la entrada es un número entero válido
-      if (!isNaN(numeroEntero) && Number.isInteger(numeroEntero)) {
-        // Hacer algo con el número entero, por ejemplo:
-        // Llamar a una función con el número entero como argumento
-        miFuncion(numeroEntero);
-      } else {
-        console.log("La entrada no es un número entero válido.");
-      }
-      let nivelDelLago = 30;
+      rl.question('porfavor ingresar los litros inicales del rio/lago ', (entro) => {
+      let nivelDelLago = parseInt(entro)
 
       //const sucecionNOaleatoria = minCuadMedios(numeroEntero, semillaHora);
       //console.log("esta es mi sucecion aleatoria", sucecionNOaleatoria);
@@ -51,11 +44,9 @@ function capturarNumeroEntero() {
       //console.log("dsa", simularNivelDelLago(ejemplo,15));
       rl.close();
     });
+  });
   }
 
 // Función para trabajar con el número entero ingresado
-function miFuncion(numero) {
-  console.log("Tabla con los", numero);
-}
 
 capturarNumeroEntero();
