@@ -35,8 +35,7 @@
         }
 
         // Determinar si el nivel del agua aumentó o disminuyó
-        let cambio = nivelActual - nivelAnterior;
-        let estadoCambio = cambio > 0 ? "aumentó" : (cambio < 0 ? "disminuyó" : "se mantuvo igual");
+       
 
         // Mostrar el estado del nivel del agua
         console.log(`Día ${i + 1}: El nivel del agua es ${nivelActual}. El nivel ${estadoCambio} por ${Math.abs(cambio)} unidades.`);
@@ -71,7 +70,8 @@
             if (nivelActual < 0) nivelActual = 0;
             compuerta1Abierta++;
         }
-
+        let cambio = nivelActual - nivelAnterior;
+        let estadoCambio = cambio > 0 ? "aumentó" : (cambio < 0 ? "disminuyó" : "se mantuvo igual");
         // Verificar si hay peligro de sequía
         if (nivelActual <= 2) {
             sequia = true;
@@ -126,7 +126,7 @@
   
   function obtenerIncrementoDiario(SecuenciaAleatoria) {
     // Inicializar variables
-    let valoresAcumulados = [0.0372, 0.2507, 0.4367, 0.5642, 0.7493, 0.9628, 1];
+    let valoresAcumulados = [0.037, 0.250, 0.436, 0.564, 0.749, 0.962, 1];
     let incrementos = [];
   
     // Recorrer la secuencia aleatoria de 3 en 3

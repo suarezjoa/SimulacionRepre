@@ -19,7 +19,7 @@ function minCuadMedios(diasDeSimulacion, semilla) {
           contadorIteraciones++;
       } else {
           // Modificar la semilla antes de cada iteración
-          semilla = semilla * semillaHora; // Variar la semilla multiplicándola por el valor de la hora actual
+          semilla = parseInt((semilla * semillaHora).toString().padStart(8, "0").substr(2, 4)); // Variar la semilla multiplicándola por el valor de la hora actual
       }
 
       // Asegurarse de que la semilla tenga al menos 4 dígitos
@@ -33,10 +33,10 @@ function minCuadMedios(diasDeSimulacion, semilla) {
       for (let j = 0; j < numString.length; j++) {
           if (x < auxiliar) {
               let num = parseInt(numString[j]);
-              if (!isNaN(num)) { // Verificar que el número no sea NaN
+              if (!isNaN(num)) { // Verificar que el número no sea NaN = VACIO
                   numerosGenerados.push(num);
                   x++;
-              }
+              }else numerosGenerados.push(0);
           } else {
               return numerosGenerados;
           }    
