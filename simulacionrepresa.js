@@ -38,7 +38,7 @@
        
 
         // Mostrar el estado del nivel del agua
-        console.log(`Día ${i + 1}: El nivel del agua es ${nivelActual}. El nivel ${estadoCambio} por ${Math.abs(cambio)} unidades.`);
+        
 
         // Verificar si hay alerta roja
         if (nivelActual > 45) {
@@ -72,6 +72,7 @@
         }
         let cambio = nivelActual - nivelAnterior;
         let estadoCambio = cambio > 0 ? "aumentó" : (cambio < 0 ? "disminuyó" : "se mantuvo igual");
+        console.log(`Día ${i + 1}: El nivel del agua es ${nivelActual}. El nivel ${estadoCambio} por ${Math.abs(cambio)} unidades.`);
         // Verificar si hay peligro de sequía
         if (nivelActual <= 2) {
             sequia = true;
